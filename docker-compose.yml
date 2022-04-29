@@ -2,14 +2,11 @@ version: "3.7"
 
 services:
   spring_api:
-    # image: spring_api
-    # command: 
     build:
       context: .
       dockerfile: ./spring_api/Dockerfile
     ports:
       - 8080:8080
-
 
   postgres_db:
     image: postgres:14
