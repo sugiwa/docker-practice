@@ -1,11 +1,4 @@
 <template>
-  <v-app>
-
-    <v-app-bar color="primary" prominent>
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>Vuetify</v-toolbar-title>
-    </v-app-bar>
-    
     <v-navigation-drawer app v-model="drawer" temporary>
       <v-list nav color="black">
         <v-list-item-group>
@@ -22,23 +15,10 @@
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
-
-    <v-main>
-      <router-view></router-view>
-    </v-main>
-
-
-  </v-app>
 </template>
 
 <script>
-
 export default {
-  name: 'App',
-
-  data: () => ({
-    drawer: false,
-    group: null,
-  }),
+    name: "NavigationDrawer"
 }
 </script>
