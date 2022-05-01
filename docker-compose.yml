@@ -12,8 +12,7 @@ services:
     volumes:
       - ./frontend:/app
 
-
-  spring_api:
+  backend:
     build:
       context: .
       dockerfile: ./spring_api/Dockerfile
@@ -28,8 +27,8 @@ services:
       - 5432:5432
     volumes:
       - db-store:/var/lib/postgresql/data
-      - ./initdb:/docker-entrypoint-initdb.d
-      - ./config/postgresql.conf:/etc/postgresql/postgresql.conf
+      - ./postgres/initdb:/docker-entrypoint-initdb.d
+      - ./postgres/config/postgresql.conf:/etc/postgresql/postgresql.conf
     environment:
       - POSTGRES_USER
       - POSTGRES_PASSWORD
