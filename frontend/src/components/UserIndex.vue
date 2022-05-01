@@ -3,6 +3,11 @@
         <v-row>
             <v-col cols="12">
                 <v-btn>Get Users</v-btn>
+                <v-btn>
+                    <router-link to="/users/new">
+                        Create User
+                    </router-link>
+                </v-btn>
                 <v-table density="compact">
                     <thead>
                         <tr>
@@ -38,7 +43,7 @@ export default {
         users: [],
     }),
     mounted() {
-        axios.get(url + 'users')
+        axios.get(url + 'users/testUser')
             .then((res) => {
                 console.log(res.data)
                 this.users = res.data
