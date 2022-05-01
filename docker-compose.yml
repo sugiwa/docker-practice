@@ -4,8 +4,8 @@ services:
 
   frontend:
     build:
-      context: .
-      dockerfile: ./frontend/Dockerfile
+      context: ./frontend
+      dockerfile: ./Dockerfile
     container_name: frontend
     ports:
       - 8081:8080
@@ -14,8 +14,9 @@ services:
 
   backend:
     build:
-      context: .
-      dockerfile: ./spring_api/Dockerfile
+      context: ./spring_api
+      dockerfile: ./Dockerfile
+    container_name: backend
     ports:
       - 8080:8080
 
@@ -30,8 +31,8 @@ services:
       - ./postgres/initdb:/docker-entrypoint-initdb.d
       - ./postgres/config/postgresql.conf:/etc/postgresql/postgresql.conf
     environment:
-      - POSTGRES_USER
-      - POSTGRES_PASSWORD
-      - POSTGRES_DB
+      - POSTGRES_USER=hoge
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=db
 volumes:
   db-store:
