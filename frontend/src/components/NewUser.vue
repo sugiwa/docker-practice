@@ -86,7 +86,7 @@ export default {
     }),
     methods: () => ({
         CreateUser: () => {
-            axios.post(url + 'users', {
+            axios.post(url + 'users/', {
                 name: this.name,
                 email: this.email,
                 password: this.password,

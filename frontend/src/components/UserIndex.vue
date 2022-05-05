@@ -43,7 +43,7 @@ export default {
         users: [],
     }),
     mounted() {
-        axios.get(url + 'users/testUser')
+        axios.get(url + 'users')
             .then((res) => {
                 console.log(res.data)
                 this.users = res.data

@@ -31,8 +31,8 @@ services:
       - ./postgres/initdb:/docker-entrypoint-initdb.d
       - ./postgres/config/postgresql.conf:/etc/postgresql/postgresql.conf
     environment:
-      - POSTGRES_USER=hoge
-      - POSTGRES_PASSWORD=root
-      - POSTGRES_DB=db
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
 volumes:
   db-store:

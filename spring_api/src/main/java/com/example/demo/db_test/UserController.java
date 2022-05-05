@@ -12,14 +12,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin
-@RequestMapping(value = "/api/users")
+@CrossOrigin(origins = {"http://localhost:8081/"})
 public class UserController {
 
 	@Autowired
 	UserRepository repository;
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/api/users", method = RequestMethod.GET)
 	public List<User> getUsers() {
 		
 		List<User> usersList = new ArrayList<User>();
@@ -29,16 +28,14 @@ public class UserController {
 		return usersList;
 	}
 
-	@RequestMapping(value = "/{userId}", method = RequestMethod.GET)
-	public User getUser(@PathVariable int userId) {
-		User user = new User();
-		
-		user = repository.getById(userId);
+	@RequestMapping(value = "/api/users/{userId}", method = RequestMethod.GET)
+	public User getUser(@PathVariable("userId") int userId) {
+		User user = repository.getById(userId);
 		
 		return user;
 	}
 	
-	@RequestMapping(value = "/", method = RequestMethod.POST)
+	@RequestMapping(value = "/api/users/", method = RequestMethod.POST)
 	public void createUser(@RequestBody UserForm form) {
 		System.out.println(form);
 		
@@ -52,12 +49,17 @@ public class UserController {
 		
 	}
 	
-	@RequestMapping(value = "/test")
+	@RequestMapping(value = "/api/users/test")
 	public String getTest() {
 		return "OK!";
 	}
 	
-	@RequestMapping(value = "/testUser", method = RequestMethod.GET)
+	@RequestMapping(value = "/api/users/valTest/{val}")
+	public int getValTest(@PathVariable int val) {
+		return val;
+	}
+	
+	@RequestMapping(value = "/api/users/testUser", method = RequestMethod.GET)
 	public List<User> getTestUsers() {
 		
 		List<User> usersList = new ArrayList<User>();
