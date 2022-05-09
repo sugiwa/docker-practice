@@ -53,7 +53,7 @@ data: () => ({
 
 methods: {
     validate () {
-        axios.post(url + '/users/login', {
+        axios.post(url + 'users/login', {
             email: this.email,
             password: this.password,
         }).then((res) => {
