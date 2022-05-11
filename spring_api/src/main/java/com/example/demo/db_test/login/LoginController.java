@@ -2,7 +2,6 @@ package com.example.demo.db_test.login;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.example.demo.db_test.User;
 import com.example.demo.db_test.UserForm;
@@ -17,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:8081/"})
+@CrossOrigin(origins = {"http://localhost:8081/"}, allowCredentials = "true")
 public class LoginController {
 
     @Autowired
@@ -27,15 +26,13 @@ public class LoginController {
 	public User UserLogin(@RequestBody UserForm form, HttpServletResponse responce) {
         User user = repository.getByEmail(form.getEmail());
 
-        String token = null;
-        
-        if(user.getPassword() == form.getPassword()) {
+        if(user.getPassword().equals(form.getPassword())) {
             
-            token = "thisisthetoken!";
+            String token = "thisisthetoken!";
 
             Cookie cookie = new Cookie("token_test", token);
-            cookie.setPath("http://localhost:8080/");
-            cookie.setMaxAge(1000 * 60);
+            cookie.setPath("/");
+            cookie.setMaxAge(60);
             responce.addCookie(cookie);
         }else {
             user = null;
