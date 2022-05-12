@@ -31,7 +31,7 @@ public class LoginController {
     @RequestMapping(value = "/api/login", method = RequestMethod.POST)
 	public User UserLogin(@RequestBody UserForm form, HttpServletResponse responce) {
         User user = repository.getByEmail(form.getEmail());
-        
+
         if(user != null && user.getPassword() == form.getPassword()) {
             
             String tk = generateRandomString(15);
@@ -53,7 +53,7 @@ public class LoginController {
     }
 
 
-    @RequestMapping(value = "/api/login/check", method = RequestMethod.POST)
+    @RequestMapping(value = "/api/login/check", method = RequestMethod.GET)
     public User LoginChecker(@CookieValue(name = "access_token") String access_token){
         
         Token token = tokenRepository.getByToken(access_token);
