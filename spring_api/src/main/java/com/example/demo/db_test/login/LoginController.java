@@ -1,8 +1,10 @@
 package com.example.demo.db_test.login;
 
+import java.util.Random;
+
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.example.demo.db_test.User;
 import com.example.demo.db_test.UserForm;
@@ -17,31 +19,69 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:8081/"})
+@CrossOrigin(origins = {"http://localhost:8081/"}, allowCredentials = "true")
 public class LoginController {
 
     @Autowired
     UserRepository repository;
 
-    @RequestMapping(value = "/api/users/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/api/login", method = RequestMethod.POST)
 	public User UserLogin(@RequestBody UserForm form, HttpServletResponse responce) {
         User user = repository.getByEmail(form.getEmail());
-
-        String token = null;
         
-        if(user.getPassword() == form.getPassword()) {
+        if(user != null && user.getPassword() == form.getPassword()) {
             
-            token = "thisisthetoken!";
+            String token = generateRandomString(15);
+            user.setToken(token);
+            repository.save(user);
 
-            Cookie cookie = new Cookie("token_test", token);
-            cookie.setPath("http://localhost:8080/");
-            cookie.setMaxAge(1000 * 60);
+            Cookie cookie = new Cookie("access_token", token);
+            cookie.setPath("/");
+            cookie.setMaxAge(5 * 60);
             responce.addCookie(cookie);
         }else {
             user = null;
         }
         
         return user;
+    }
+
+
+    @RequestMapping(value = "/api/login/check", method = RequestMethod.POST)
+    public User LoginChecker(@CookieValue(name = "access_token") String access_token){
+        User user = repository.findByToken(access_token);
+        return user;
+    }
+
+    @RequestMapping(value = "api/logout", method = RequestMethod.POST)
+    public void UserLogout(@CookieValue(name = "access_token") String access_token, HttpServletRequest request, HttpServletResponse response){
+        
+        User user = repository.findByToken(access_token);
+        user.setToken(null);
+        repository.save(user);
+        
+        Cookie[] cookies = request.getCookies();
+        for(Cookie cookie: cookies){
+            if("access_token".equals(cookie.getName())){
+                cookie.setMaxAge(0);
+                cookie.setPath("/");
+                response.addCookie(cookie);
+            }
+        }
+
+
+    }
+
+    public static String generateRandomString(int len){
+		Random r = new Random();
+		String alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890=?";
+		String str = "";
+		for (int i = 0; i < len; i++) {
+			str = str + alphabet.charAt(r.nextInt(alphabet.length()));
+		}
+		System.out.println(str);
+
+        return str;
     }
 
     @RequestMapping(value = "/api/users/login/cookie", method = RequestMethod.GET)

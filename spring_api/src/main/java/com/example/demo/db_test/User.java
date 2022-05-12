@@ -27,6 +27,17 @@ public class User {
 	@Column
 	private String password;
 
+	@Column
+	private String token;
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
 	public int getId() {
 		return id;
 	}
