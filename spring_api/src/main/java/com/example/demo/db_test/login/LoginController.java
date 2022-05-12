@@ -25,17 +25,23 @@ public class LoginController {
     @Autowired
     UserRepository repository;
 
+    @Autowired
+    TokenRepository tokenRepository;
+
     @RequestMapping(value = "/api/login", method = RequestMethod.POST)
 	public User UserLogin(@RequestBody UserForm form, HttpServletResponse responce) {
         User user = repository.getByEmail(form.getEmail());
         
         if(user != null && user.getPassword() == form.getPassword()) {
             
-            String token = generateRandomString(15);
-            user.setToken(token);
-            repository.save(user);
+            String tk = generateRandomString(15);
 
-            Cookie cookie = new Cookie("access_token", token);
+            Token token = new Token();
+            token.setUser_id(user.getId());
+            token.setToken(tk);
+            tokenRepository.save(token);
+
+            Cookie cookie = new Cookie("access_token", tk);
             cookie.setPath("/");
             cookie.setMaxAge(5 * 60);
             responce.addCookie(cookie);
@@ -49,16 +55,18 @@ public class LoginController {
 
     @RequestMapping(value = "/api/login/check", method = RequestMethod.POST)
     public User LoginChecker(@CookieValue(name = "access_token") String access_token){
-        User user = repository.findByToken(access_token);
+        
+        Token token = tokenRepository.getByToken(access_token);
+
+        User user = repository.getById(token.getUser_id());
         return user;
     }
 
     @RequestMapping(value = "api/logout", method = RequestMethod.POST)
     public void UserLogout(@CookieValue(name = "access_token") String access_token, HttpServletRequest request, HttpServletResponse response){
-        
-        User user = repository.findByToken(access_token);
-        user.setToken(null);
-        repository.save(user);
+
+        Token token = tokenRepository.getByToken(access_token);
+        tokenRepository.delete(token);
         
         Cookie[] cookies = request.getCookies();
         for(Cookie cookie: cookies){
@@ -68,7 +76,6 @@ public class LoginController {
                 response.addCookie(cookie);
             }
         }
-
 
     }
 
