@@ -1,0 +1,5 @@
+CREATE TABLE tokens(
+    id SERIAL NOT NULL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(id),
+    token VARCHAR UNIQUE NOT NULL
+)
