@@ -29,9 +29,13 @@
     </v-btn>
 
   </v-form>
+  <router-link :to="{path: '/users/login/cookie'}">
+    cookie
+  </router-link>
 </template>
 
 <script>
+// import axios from "../../util/axios.js"
 import axios from "axios"
 
 const url = 'http://localhost:8080/spring_api/api/'
@@ -53,13 +57,26 @@ data: () => ({
 
 methods: {
     validate () {
-        axios.post(url + '/users/login', {
+        axios.post(url + 'users/login', {
+<<<<<<< Updated upstream
             email: this.email,
             password: this.password,
+=======
+          email: this.email,
+          password: this.password,
+          headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+            'Access-Control-Allow-Credentials': true
+          }
+        }, {
+          withCredentials: true,
+>>>>>>> Stashed changes
         }).then((res) => {
-            console.log(res)
+          console.log(res)
         }).catch((err) => {
-            console.log(err)
+          console.log(err)
+        }).finally(() => {
+          // console.log(withCredentials)
         })
     },
 },
