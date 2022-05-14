@@ -36,15 +36,11 @@
     </v-form>
     </v-container>
   </v-card>
-
-  <router-link :to="{path: '/users/login/cookie'}">
-    cookie
-  </router-link>
 </template>
 
 <script>
-// import axios from "../../util/axios.js"
-import axios from "axios"
+import axios from "../../util/axios.js"
+// import axios from "axios"
 
 const url = 'http://localhost:8080/spring_api/api/'
 
@@ -70,6 +66,7 @@ methods: {
             password: this.password,
         }).then((res) => {
           console.log(res)
+          this.$router.push({ path: '/users' })
         }).catch((err) => {
           console.log(err)
         })
