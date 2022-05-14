@@ -1,21 +1,22 @@
 <template>
     <v-container>
         <v-row>
-            <v-col cols="12">
-                {{ this.$route.params.id}}
-                <v-btn color="primary">Get Users</v-btn>
-                <v-btn color="success" @click="openNewUser">
-                    <!-- <router-link to="/users/new" class="text-decoration-none text-white"> -->
-                        Create User
-                    <!-- </router-link> -->
-                </v-btn>
+            <v-col cols="10"  class="mx-auto">
+                <h2 class="d-inline mr-10">User Detail</h2>
+                <v-btn size="small" color="error" @click="deleteUser">delete</v-btn>
                 <v-table density="compact">
                     <tbody>
                         <tr>
+                            <th>id</th>
                             <td class="text-center">{{ user.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>name</th>
                             <td class="text-center">{{ user.name }}</td>
+                        </tr>
+                        <tr>
+                            <th>email</th>
                             <td class="text-center">{{ user.email }}</td>
-                            <td class="text-center"><v-btn size="small" color="error" @click="deleteUser">show</v-btn></td>
                         </tr>
                     </tbody>
                 </v-table> 
@@ -59,7 +60,7 @@ export default {
         deleteUser(data) {
             if(confirm("本当に削除しますか？")){
                 console.log(data)
-                axios.delete(url + `users/${user_id}/delete`)
+                axios.delete(url + `users/${this.user.id}/delete`)
                     .then((res) => {
                         console.log(res)
                         this.$router.push({ path: '/users' })

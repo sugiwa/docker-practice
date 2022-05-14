@@ -10,8 +10,10 @@
         </v-toolbar-title>
 
         <!-- <v-spacer></v-spacer> -->
+        <p v-if="this.current_user">{{ this.current_user.name }}</p>
 
-        <v-btn variant="text" icon="mdi-account-circle" @click="openLoginForm"></v-btn>
+        <v-btn v-if="this.current_user" variant="text" icon="mdi-account-arrow-left-outline" @click="logout"></v-btn>
+        <v-btn v-if="this.current_user" variant="text" icon="mdi-account-circle" @click="openLoginForm"></v-btn>
         <v-btn variant="text" icon="mdi-magnify"></v-btn>
     </v-app-bar>
     
@@ -41,10 +43,21 @@
 </template>
 
 <script>
+import axios from './util/axios'
 
 export default {
   name: 'App',
 
+  computed: {
+    current_user() {
+      return this.$store.state.current_user
+    }
+  },
+  // watch: {
+  //   $route () {
+  //     location.reload()
+  //   }
+  // },
   data: () => ({
     drawer: false,
     group: null,
@@ -52,6 +65,17 @@ export default {
   methods: {
     openLoginForm() {
       this.$router.push({ path: '/users/login' })
+    },
+    logout() {
+      if(window.confirm("ログアウトしますか？")){
+        axios.post('http://localhost:8080/spring_api/api/logout')
+          .then(res => {
+            console.log(res)
+            // if(res.data)
+            this.$store.commit('current_user', null)
+            this.$router.push({ path: '/users/login' })
+          })
+      }
     }
   }
 }
