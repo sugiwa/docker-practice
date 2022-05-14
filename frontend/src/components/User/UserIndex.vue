@@ -1,9 +1,9 @@
 <template>
     <v-container>
         <v-row>
-            <v-col cols="12">
-                <v-btn color="primary">Get Users</v-btn>
-                <v-btn color="success" @click="openNewUser">
+            <v-col cols="10" class="mx-auto">
+                <h2 class="d-inline mr-10">Users</h2>
+                <v-btn color="success" class="mx-5" @click="openNewUser">
                     <!-- <router-link to="/users/new" class="text-decoration-none text-white"> -->
                         Create User
                     <!-- </router-link> -->
@@ -14,7 +14,7 @@
                             <th class="text-center">ID</th>
                             <th class="text-center">Name</th>
                             <th class="text-center">email</th>
-                            <th class="text-center">password</th>
+                            <th class="text-center"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -22,7 +22,7 @@
                             <td class="text-center">{{ user.id }}</td>
                             <td class="text-center">{{ user.name }}</td>
                             <td class="text-center">{{ user.email }}</td>
-                            <td class="text-center"><v-btn size="small" color="blue" @click="showUserDetail(user.id)">show</v-btn></td>
+                            <td class="text-center"><v-btn size="small" color="" @click="showUserDetail(user.id)">show</v-btn></td>
                         </tr>
                     </tbody>
                 </v-table> 

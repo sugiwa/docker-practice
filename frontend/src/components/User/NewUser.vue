@@ -1,68 +1,65 @@
 <template>
-    <v-form v-model="valid">
-        <v-container>
-            <v-row>
-                <v-col
-                cols="12"
-                md="4"
-                >
-                <v-text-field
-                    v-model="name"
-                    :rules="nameRules"
-                    :counter="10"
-                    label="Name"
-                    required
-                ></v-text-field>
-                </v-col>
-
-                <v-col
-                cols="12"
-                md="4"
-                >
-                <v-text-field
-                    v-model="email"
-                    :rules="emailRules"
-                    label="E-mail"
-                    required
-                ></v-text-field>
-                </v-col>
-
-                <v-col
-                cols="12"
-                md="4"
-                >
-                <v-text-field
-                    v-model="password"
-                    :rules="passwordRules"
-                    :counter="4"
-                    label="Password"
-                    required
-                ></v-text-field>
-                </v-col>
-
-                <v-col
-                cols="12"
-                md="4"
-                >
-                <v-btn
-                    :disabled="!valid"
-                    color="success"
-                    class="mr-4"
-                    v-on:click="CreateUser"
+    <v-card
+        class="mx-auto mt-10"
+        max-width="600"
+    >
+        <h2 class="ml-5">Create User</h2>
+        <v-form v-model="valid">
+            <v-container>
+                <v-row>
+                    <v-col
+                    cols="12"
+                    class="mx-auto"
                     >
-                    Create
-                </v-btn>
-                </v-col>
-            </v-row>
-            <v-btn
-                color="delete"
-                class="mr-4"
-                v-on:click="alert"
-                >
-                Create
-            </v-btn>
-        </v-container>
-    </v-form>
+                    <v-text-field
+                        v-model="name"
+                        :rules="nameRules"
+                        :counter="10"
+                        label="Name"
+                        required
+                    ></v-text-field>
+                    </v-col>
+
+                    <v-col
+                    cols="12"
+                    >
+                    <v-text-field
+                        v-model="email"
+                        :rules="emailRules"
+                        label="E-mail"
+                        required
+                    ></v-text-field>
+                    </v-col>
+
+                    <v-col
+                    cols="12"
+                    >
+                    <v-text-field
+                        v-model="password"
+                        :rules="passwordRules"
+                        :counter="4"
+                        label="Password"
+                        required
+                    ></v-text-field>
+                    </v-col>
+
+                    <v-col
+                    cols="3"
+                    class="ml-auto"
+                    >
+                    <v-btn
+                        :disabled="!valid"
+                        color="success"
+                        class="ml-auto"
+                        v-on:click="CreateUser"
+                        >
+                        Create
+                    </v-btn>
+                    </v-col>
+                </v-row>
+            </v-container>
+        </v-form>
+    </v-card>
 </template>
 
 <script>

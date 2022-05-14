@@ -11,22 +11,9 @@
 
         <!-- <v-spacer></v-spacer> -->
         <p v-if="this.current_user">{{ this.current_user.name }}</p>
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn
-              color="primary"
-              dark
-              v-bind="attrs"
-              v-on="on"
-              @click="logout"
-            >
-              Button
-            </v-btn>
-          </template>
-          <span>Tooltip</span>
-        </v-tooltip>
 
-        <v-btn variant="text" icon="mdi-account-circle" @click="openLoginForm"></v-btn>
+        <v-btn v-if="this.current_user" variant="text" icon="mdi-account-arrow-left-outline" @click="logout"></v-btn>
+        <v-btn v-if="this.current_user" variant="text" icon="mdi-account-circle" @click="openLoginForm"></v-btn>
         <v-btn variant="text" icon="mdi-magnify"></v-btn>
     </v-app-bar>
     
@@ -66,6 +53,11 @@ export default {
       return this.$store.state.current_user
     }
   },
+  // watch: {
+  //   $route () {
+  //     location.reload()
+  //   }
+  // },
   data: () => ({
     drawer: false,
     group: null,
@@ -79,6 +71,7 @@ export default {
         axios.post('http://localhost:8080/spring_api/api/logout')
           .then(res => {
             console.log(res)
+            // if(res.data)
             this.$store.commit('current_user', null)
             this.$router.push({ path: '/users/login' })
           })
