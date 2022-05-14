@@ -1,34 +1,42 @@
 <template>
-  <v-form
-    ref="form"
-    v-model="valid"
-    lazy-validation
+  <v-card
+    class="mx-auto mt-10"
+    max-width="400"
   >
-    <h2>ログイン</h2>
-    <v-text-field
-      v-model="email"
-      :rules="emailRules"
-      label="E-mail"
-      required
-    ></v-text-field>
+    <v-container>
 
-    <v-text-field
-      v-model="password"
-      :counter="10"
-      :rules="passwordRules"
-      label="Password"
-      required
-    ></v-text-field>
-    <v-btn
-      :disabled="!valid"
-      color="success"
-      class="mr-4"
-      @click="validate"
-    >
-      Validate
-    </v-btn>
+      <v-form
+        ref="form"
+        v-model="valid"
+        lazy-validation
+      >
+        <h2>ログイン</h2>
+        <v-text-field
+          v-model="email"
+          :rules="emailRules"
+          label="E-mail"
+          required
+        ></v-text-field>
 
-  </v-form>
+        <v-text-field
+          v-model="password"
+          :counter="10"
+          :rules="passwordRules"
+          label="Password"
+          required
+        ></v-text-field>
+        <v-btn
+          :disabled="!valid"
+          color="success"
+          class="mr-4"
+          @click="validate"
+        >
+          Validate
+        </v-btn>
+    </v-form>
+    </v-container>
+  </v-card>
+
   <router-link :to="{path: '/users/login/cookie'}">
     cookie
   </router-link>
@@ -57,26 +65,13 @@ data: () => ({
 
 methods: {
     validate () {
-        axios.post(url + 'users/login', {
-<<<<<<< Updated upstream
+        axios.post(url + 'login', {
             email: this.email,
             password: this.password,
-=======
-          email: this.email,
-          password: this.password,
-          headers: {
-            'Content-Type': 'application/json;charset=UTF-8',
-            'Access-Control-Allow-Credentials': true
-          }
-        }, {
-          withCredentials: true,
->>>>>>> Stashed changes
         }).then((res) => {
           console.log(res)
         }).catch((err) => {
           console.log(err)
-        }).finally(() => {
-          // console.log(withCredentials)
         })
     },
 },

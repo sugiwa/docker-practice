@@ -32,10 +32,17 @@ public class LoginController {
 	public User UserLogin(@RequestBody UserForm form, HttpServletResponse responce) {
         User user = repository.getByEmail(form.getEmail());
 
-        if(user != null && user.getPassword() == form.getPassword()) {
+        System.out.println("接続開始だよーーーーーーーーーーーーーーーーーーーーーーー");
+        System.out.println("接続開始だよーーーーーーーーーーーーーーーーーーーーーーー");
+        System.out.println("接続開始だよーーーーーーーーーーーーーーーーーーーーーーー");
+        System.out.println("接続開始だよーーーーーーーーーーーーーーーーーーーーーーー");
+        System.out.println("接続開始だよーーーーーーーーーーーーーーーーーーーーーーー");
+        System.out.println(user);
+        if(user != null && user.getPassword().equals(form.getPassword())) {
             
             String tk = generateRandomString(15);
 
+            System.out.println(tk);
             Token token = new Token();
             token.setUser_id(user.getId());
             token.setToken(tk);
