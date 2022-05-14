@@ -7,5 +7,6 @@ CREATE TABLE users (
 );
 
 -- サンプルレコード作成
+INSERT INTO users (name, email, password) VALUES('admin', 'admin@admin.com', 'admin');
 INSERT INTO users (name, email, password) VALUES('osdh', 'asgasd@example.com', 'paordgdh');
 INSERT INTO users (name, email, password) VALUES('rhsosgoi', 'bbb@example.com', 'wsswoghfh');
