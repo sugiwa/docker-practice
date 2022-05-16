@@ -1,4 +1,4 @@
-package com.example.demo.db_test;
+package com.example.demo.db_test.user;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.example.demo.db_test;
+package com.example.demo.db_test.user;
 
 public class UserForm {
 

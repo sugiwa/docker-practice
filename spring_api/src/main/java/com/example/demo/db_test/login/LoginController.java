@@ -6,9 +6,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.example.demo.db_test.User;
-import com.example.demo.db_test.UserForm;
-import com.example.demo.db_test.UserRepository;
+import com.example.demo.db_test.user.User;
+import com.example.demo.db_test.user.UserForm;
+import com.example.demo.db_test.user.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CookieValue;
