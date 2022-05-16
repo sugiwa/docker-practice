@@ -15,8 +15,8 @@ public class Schedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column
-    private int user_id;
+    @Column(name = "user_id")
+    private int userId;
     @Column
     private String title;
     @Column
@@ -32,11 +32,11 @@ public class Schedule {
     public void setId(int id) {
         this.id = id;
     }
-    public int getUser_id() {
-        return user_id;
+    public int getUserId() {
+        return userId;
     }
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
     public String getTitle() {
         return title;
