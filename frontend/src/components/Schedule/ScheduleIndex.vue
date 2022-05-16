@@ -20,8 +20,10 @@
                     <tbody>
                         <tr v-for="schedule in schedules" :key="schedule.id">
                             <td class="text-center">{{ schedule.id }}</td>
-                            <td class="text-center">{{ schedule.name }}</td>
-                            <td class="text-center">{{ schedule.email }}</td>
+                            <td class="text-center">{{ schedule.title }}</td>
+                            <td class="text-center">{{ schedule.content }}</td>
+                            <td class="text-center">{{ schedule.started_at }}</td>
+                            <td class="text-center">{{ schedule.finished_at }}</td>
                             <td class="text-center"><v-btn size="small">show</v-btn></td>
                         </tr>
                     </tbody>

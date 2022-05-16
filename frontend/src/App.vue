@@ -27,7 +27,12 @@
           </router-link>
           <router-link :to="{ path: '/users'}" class="text-decoration-none">
             <v-btn block elevation="0">
-              <v-list-item prepend-icon="mdi-account-supervisor-circle" title="USERS"></v-list-item>
+              <v-list-item prepend-icon="mdi-account-supervisor-circle" title="USER"></v-list-item>
+            </v-btn>
+          </router-link>
+          <router-link :to="{ path: '/schedules'}" class="text-decoration-none">
+            <v-btn block elevation="0">
+              <v-list-item prepend-icon="mdi-calendar-month-outline" title="SCHEDULE"></v-list-item>
             </v-btn>
           </router-link>
         </v-list-item-group>
@@ -53,11 +58,6 @@ export default {
       return this.$store.state.current_user
     }
   },
-  // watch: {
-  //   $route () {
-  //     location.reload()
-  //   }
-  // },
   data: () => ({
     drawer: false,
     group: null,
