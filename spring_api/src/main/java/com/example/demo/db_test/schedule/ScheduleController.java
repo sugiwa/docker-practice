@@ -33,7 +33,7 @@ public class ScheduleController {
     public Schedule createSchedule(@RequestBody ScheduleForm form){
         Schedule schedule = new Schedule();
 
-        schedule.setUser_id(form.getUser_id());
+        schedule.setUserId(form.getUser_id());
         schedule.setTitle(form.getTitle());
         schedule.setContent(form.getContent());
         schedule.setStarted_at(form.getStarted_at());
