@@ -55,7 +55,7 @@ export default {
     },
     methods: {
         openNewSchedule(){
-            // this.$router.push({ path: '/users/new' })
+            this.$router.push({ path: '/schedules/new' })
         }
     }
 }

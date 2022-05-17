@@ -5,6 +5,7 @@ import NewUser from './components/User/NewUser.vue'
 import ShowUser from './components/User/ShowUser.vue'
 import UserLogin from './components/User/UserLogin.vue'
 import ScheduleIndex from './components/Schedule/ScheduleIndex.vue'
+import NewSchedule from './components/Schedule/NewSchedule.vue'
 
 import HelloWorld from './components/HelloWorld.vue'
 import axios from './util/axios'
@@ -17,6 +18,7 @@ const routes = [
     { path: '/users/detail', component: ShowUser },
     { path: '/users/login', component: UserLogin },
     { path: '/schedules', component: ScheduleIndex },
+    { path: '/schedules/new', component: NewSchedule },
 ];
   
 const router = createRouter({
