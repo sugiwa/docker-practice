@@ -29,7 +29,7 @@ public class ScheduleController {
         return scheduleList;
     }
 
-    @RequestMapping(value = "/api/schdules", method = RequestMethod.POST)
+    @RequestMapping(value = "/api/schedules", method = RequestMethod.POST)
     public Schedule createSchedule(@RequestBody ScheduleForm form){
         Schedule schedule = new Schedule();
 
@@ -41,5 +41,11 @@ public class ScheduleController {
         repository.save(schedule);
 
         return schedule;
+    }
+
+    @RequestMapping(value = "/api/schedules/{id}/delete", method = RequestMethod.DELETE)
+    public void deleteSchedule(@PathVariable("id") int id){
+        Schedule schedule = repository.getById(id);
+        repository.delete(schedule);
     }
 }
