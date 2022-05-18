@@ -40,7 +40,7 @@
                         :disabled="!valid"
                         color="success"
                         class="ml-auto"
-                        v-on:click="CreateUser"
+                        v-on:click="createSchedule"
                         >
                         Create
                     </v-btn>
@@ -73,7 +73,7 @@ export default {
         ],
     }),
     methods: {
-        CreateSchedule() {
+        createSchedule() {
             axios.post(url + 'schedules/', {
                 user_id: 1,
                 title: this.title,
