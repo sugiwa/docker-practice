@@ -33,36 +33,6 @@
                     </v-col>
 
                     <v-col
-                    cols="12"
-                    sm="6"
-                    md="4"
-                    >
-                    <v-menu
-                        v-model="menu2"
-                        :close-on-content-click="false"
-                        :nudge-right="40"
-                        transition="scale-transition"
-                        offset-y
-                        min-width="auto"
-                    >
-                        <template v-slot:activator="{ on, attrs }">
-                        <v-text-field
-                            v-model="date"
-                            label="Picker without buttons"
-                            prepend-icon="mdi-calendar"
-                            readonly
-                            v-bind="attrs"
-                            v-on="on"
-                        ></v-text-field>
-                        </template>
-                        <v-date-picker
-                        v-model="date"
-                        @input="menu2 = false"
-                        ></v-date-picker>
-                    </v-menu>
-                    </v-col>
-
-                    <v-col
                     cols="3"
                     class="ml-auto"
                     >
@@ -101,17 +71,13 @@ export default {
             v => !!v || 'Title is required',
             // v => v.length <= 10 || 'Name must be less than 10 characters',
         ],
-        date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString(),
-        menu: false,
-        modal: false,
-        menu2: false,
     }),
     methods: {
         CreateSchedule() {
-            axios.post(url + 'schedule/', {
-                name: this.name,
-                email: this.email,
-                password: this.password,
+            axios.post(url + 'schedules/', {
+                user_id: 1,
+                title: this.title,
+                content: this.content,
             })
             .then((res) => {
                 console.log("success: ", res)
