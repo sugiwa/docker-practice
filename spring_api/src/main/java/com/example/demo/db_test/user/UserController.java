@@ -57,6 +57,16 @@ public class UserController {
 		repository.delete(user);
 	}
 
+	@RequestMapping(value = "/api/users/email/check", method = RequestMethod.POST)
+	public boolean checkDuplicatedEmail(@RequestBody UserForm form){
+		User user = repository.getByEmail(form.getEmail());
+		if(user != null){
+			return true;
+		}
+
+		return false;
+	}
+
 	// TEST
 	@RequestMapping(value = "/api/users/test")
 	public String getTest() {
