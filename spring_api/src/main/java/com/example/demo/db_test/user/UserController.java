@@ -60,7 +60,7 @@ public class UserController {
 	@RequestMapping(value = "/api/users/email/check", method = RequestMethod.POST)
 	public boolean checkDuplicatedEmail(@RequestBody UserForm form){
 		User user = repository.getByEmail(form.getEmail());
-		if(user != null){
+		if(user == null){
 			return true;
 		}
 
