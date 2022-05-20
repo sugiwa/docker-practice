@@ -26,6 +26,8 @@
                     <v-text-field
                         v-model="email"
                         :rules="emailRules"
+                        :error="!this.is_valid_email"
+                        :error-message="'change your email'"
                         label="E-mail"
                         required
                     ></v-text-field>
@@ -86,9 +88,26 @@ export default {
         passwordRules: [
             v => !!v || 'Password is required',
             v => v.length >= 4 || 'Password must be more than 4 characters',
-        ]
+        ],
+        is_valid_email: false
     }),
+    watch: {
+        email: function(newEmail, oldEmail){
+            console.log(oldEmail)
+            this.checkEmail(newEmail)
+        }
+    },
     methods: {
+        checkEmail(email){
+            // var vm = this
+            axios.post(url + 'users/email/check', {
+                email: email,
+            })
+            .then(res => {
+                this.is_valid_email = res.data
+            })
+            console.log(this.is_valid_email)
+        },
         CreateUser() {
             axios.post(url + 'users/', {
                 name: this.name,
